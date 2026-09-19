@@ -9,7 +9,20 @@ Ce projet simule l'architecture réseau sécurisée d'une entreprise avec deux s
 L'objectif n'était pas seulement de faire fonctionner le réseau, mais de justifier chaque choix de sécurité comme le ferait un consultant face à un client : pourquoi cette segmentation, pourquoi cette règle d'accès précise plutôt qu'un blocage total, comment vérifier qu'une mesure de sécurité fonctionne réellement.
 
 ## Architecture
-
+```mermaid
+flowchart LR
+    subgraph SiteA["Site principal"]
+        RH1[PC-RH1] --- SW[Switch L2]
+        RH2[PC-RH2] --- SW
+        FIN1[PC-FIN1] --- SW
+        FIN2[PC-FIN2] --- SW
+        SRV[Serveur d'impression] --- SW
+        SW ---|Trunk 802.1Q| R1[R1 - Routeur cœur]
+    end
+    R1 ---|NAT/PAT| R2[R2 - Internet]
+    R2 ---|Tunnel VPN IPsec chiffré| R3[R3 - Site distant]
+    R3 --- DIST[PC-DISTANT]
+```
 ![Architecture](<Capture d'écran 2026-09-19 075030.png>)
 
 **Plan d'adressage :**
