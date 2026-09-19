@@ -64,10 +64,20 @@ icmp 203.0.113.1:24    10.10.10.11:24     203.0.113.2:24    203.0.113.2:24
 Un tunnel VPN IPsec (IKE/ISAKMP + ESP AES-256) chiffre l'ensemble du trafic entre le site principal et le site distant, avec une ACL de trafic dédiée exclue du NAT pour préserver l'intégrité du tunnel.
 
 **Preuve du tunnel actif (`show crypto isakmp sa`) :![Preuve du tunnel actif (`show crypto isakmp sa`)](<Capture d'écran 2026-09-19 074818.png>)**
+```
+dst           src           state    conn-id slot status
+203.0.113.10  203.0.113.1   QM_IDLE  1071    0    ACTIVE
+```
 
-
-**Preuve du chiffrement effectif (`show crypto ipsec sa`) :![Preuve du chiffrement effectif (`show crypto ipsec sa`)](<Capture d'écran 2026-09-19 075834.png>)**
-
+**Preuve du chiffrement effectif (`show crypto ipsec sa`) :
+![Preuve du chiffrement effectif (`show crypto ipsec sa`)](<Capture d'écran 2026-09-19 075834.png>)**
+```
+local ident (addr/mask/prot/port): (10.10.10.0/255.255.255.0/0/0)
+remote ident (addr/mask/prot/port): (10.10.30.0/255.255.255.0/0/0)
+current_peer 203.0.113.10 port 500
+#pkts encaps: 7, #pkts encrypt: 7
+#pkts decaps: 6, #pkts decrypt: 6
+```
 ## Validation
 
 | Test | Résultat attendu | Résultat obtenu |
