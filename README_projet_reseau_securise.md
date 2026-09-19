@@ -23,7 +23,7 @@ flowchart LR
     R2 ---|Tunnel VPN IPsec chiffré| R3[R3 - Site distant]
     R3 --- DIST[PC-DISTANT]
 ```
-![Architecture](<Capture d'écran 2026-09-19 075030.png>)
+![Architecture](<Architecture.png>)
 
 **Plan d'adressage :**
 
@@ -63,14 +63,14 @@ icmp 203.0.113.1:24    10.10.10.11:24     203.0.113.2:24    203.0.113.2:24
 ### 4. Chiffrement des communications inter-sites (VPN IPsec site-à-site)
 Un tunnel VPN IPsec (IKE/ISAKMP + ESP AES-256) chiffre l'ensemble du trafic entre le site principal et le site distant, avec une ACL de trafic dédiée exclue du NAT pour préserver l'intégrité du tunnel.
 
-**Preuve du tunnel actif (`show crypto isakmp sa`) :![Preuve du tunnel actif (`show crypto isakmp sa`)](<Capture d'écran 2026-09-19 074818.png>)**
+**Preuve du tunnel actif (`show crypto isakmp sa`) :![Preuve du tunnel actif (`show crypto isakmp sa`)](<Chiffrement des communications inter-sites.png>)**
 ```
 dst           src           state    conn-id slot status
 203.0.113.10  203.0.113.1   QM_IDLE  1071    0    ACTIVE
 ```
 
 **Preuve du chiffrement effectif (`show crypto ipsec sa`) :
-![Preuve du chiffrement effectif (`show crypto ipsec sa`)](<Capture d'écran 2026-09-19 075834.png>)**
+![Preuve du chiffrement effectif (`show crypto ipsec sa`)](<Chiffrement des communications inter-sites.png>)**
 ```
 local ident (addr/mask/prot/port): (10.10.10.0/255.255.255.0/0/0)
 remote ident (addr/mask/prot/port): (10.10.30.0/255.255.255.0/0/0)
